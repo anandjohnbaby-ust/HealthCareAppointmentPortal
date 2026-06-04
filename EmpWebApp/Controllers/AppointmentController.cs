@@ -61,25 +61,6 @@ namespace HealthCareApp.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Create(
-            Appointment appointment)
-        {
-            if (!ModelState.IsValid)
-            {
-                LoadDropdowns();
-
-                return View(appointment);
-            }
-
-            _appointmentService
-                .AddAppointment(
-                    appointment);
-
-            return RedirectToAction(
-                "Index");
-        }
-
         public ActionResult Edit(int id)
         {
             Appointment appointment =
@@ -158,6 +139,85 @@ namespace HealthCareApp.Controllers
                 Enum.GetValues(
                     typeof(AppointmentStatus))
                 .Cast<AppointmentStatus>();
+        }
+
+        [HttpPost]
+        public ActionResult Create(
+    Appointment appointment)
+        {
+            if (!ModelState.IsValid)
+            {
+                LoadDropdowns();
+
+                return View(appointment);
+            }
+
+            try
+            {
+                _appointmentService
+                    .AddAppointment(
+                        appointment);
+
+                return RedirectToAction(
+                    "Index");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(
+                    "",
+                    ex.Message);
+
+                LoadDropdowns();
+
+                return View(appointment);
+            }
+        }
+        public ActionResult Confirm(int id)
+        {
+            _appointmentService
+                .ConfirmAppointment(id);
+
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Complete(int id)
+        {
+            _appointmentService
+                .CompleteAppointment(id);
+
+            return RedirectToAction("Index");
+        }
+
+        //public ActionResult Cancel(int id)
+        //{
+        //    Appointment appointment =
+        //        _appointmentService
+        //        .GetById(id);
+
+        //    return View(appointment);
+        //}
+        public ActionResult Cancel(int id)
+        {
+            _appointmentService
+                .CancelAppointment(
+                    id,
+                    "Cancelled by user");
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Cancel(
+    int id,
+    string reason)
+        {
+            _appointmentService
+                .CancelAppointment(
+                    id,
+                    reason);
+
+            return RedirectToAction(
+                "Index");
         }
     }
 }

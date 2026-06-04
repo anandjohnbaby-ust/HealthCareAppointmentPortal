@@ -17,5 +17,13 @@ namespace HealthCareApp.Services
             Appointment appointment);
 
         void DeleteAppointment(int id);
+
+        void ConfirmAppointment(int id);
+
+        void CompleteAppointment(int id);
+
+        void CancelAppointment(
+            int id,
+            string reason);
     }
 }

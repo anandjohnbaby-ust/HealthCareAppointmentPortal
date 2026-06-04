@@ -6,6 +6,14 @@
 
 @using (Html.BeginForm())
 {
+    @Html.ValidationSummary(
+        true,
+        "",
+        new
+        {
+            @class = "text-danger"
+        })
+
     <div class="mb-2">
 
         <label>Patient</label>
@@ -16,8 +24,15 @@
             "-- Select Patient --",
             new
             {
-                @class =
-                "form-control"
+                @class = "form-control"
+            })
+
+        @Html.ValidationMessageFor(
+            m => m.PatientId,
+            "",
+            new
+            {
+                @class = "text-danger"
             })
 
     </div>
@@ -32,8 +47,15 @@
             "-- Select Doctor --",
             new
             {
-                @class =
-                "form-control"
+                @class = "form-control"
+            })
+
+        @Html.ValidationMessageFor(
+            m => m.DoctorId,
+            "",
+            new
+            {
+                @class = "text-danger"
             })
 
     </div>
@@ -49,8 +71,15 @@
             new
             {
                 type = "date",
-                @class =
-                "form-control"
+                @class = "form-control"
+            })
+
+        @Html.ValidationMessageFor(
+            m => m.ScheduledDate,
+            "",
+            new
+            {
+                @class = "text-danger"
             })
 
     </div>
@@ -64,13 +93,32 @@
             m => m.TimeSlot,
             new
             {
-                @class =
-                "form-control"
+                @class = "form-control",
+                placeholder = "Example: 10:00 AM"
+            })
+
+        @Html.ValidationMessageFor(
+            m => m.TimeSlot,
+            "",
+            new
+            {
+                @class = "text-danger"
             })
 
     </div>
 
-    <button class="btn btn-primary">
+    <button type="submit"
+            class="btn btn-primary">
         Book Appointment
     </button>
+
+    @Html.ActionLink(
+        "Cancel",
+        "Index",
+        null,
+        new
+        {
+            @class =
+            "btn btn-secondary ms-2"
+        })
 }

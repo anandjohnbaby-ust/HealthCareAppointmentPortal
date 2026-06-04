@@ -2,10 +2,10 @@
 
 namespace HealthCareApp.Exceptions
 {
-    public class PreviousDateException
+    public class PastDateException
         : Exception
     {
-        public PreviousDateException()
+        public PastDateException()
             : base(
                 "Appointment date cannot be in the past.")
         {

@@ -141,7 +141,12 @@
     <Compile Include="Enums\AppointmentStatus.cs" />
     <Compile Include="Enums\Gender.cs" />
     <Compile Include="Enums\Specialisation.cs" />
+    <Compile Include="Exceptions\AdvanceBookingLimitException.cs" />
+    <Compile Include="Exceptions\AppointmentConflictException.cs" />
+    <Compile Include="Exceptions\AppointmentTimeConflictException.cs" />
+    <Compile Include="Exceptions\PastDateException.cs" />
     <Compile Include="Exceptions\PatientAppException.cs" />
+    <Compile Include="Exceptions\PreviousDateException.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

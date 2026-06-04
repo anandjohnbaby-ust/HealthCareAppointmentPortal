@@ -1,4 +1,5 @@
 ﻿using HealthCareApp.Models;
+using System;
 using System.Collections.Generic;
 
 namespace HealthCareApp.Repositories
@@ -17,5 +18,10 @@ namespace HealthCareApp.Repositories
             Appointment appointment);
 
         void DeleteAppointment(int id);
+
+        Appointment GetConflictingAppointment(
+            int doctorId,
+            DateTime date,
+            string timeSlot);
     }
 }
