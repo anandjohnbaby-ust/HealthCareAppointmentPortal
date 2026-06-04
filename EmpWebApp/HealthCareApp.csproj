@@ -135,6 +135,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="Controllers\AppointmentController.cs" />
     <Compile Include="Controllers\DoctorController.cs" />
+    <Compile Include="Controllers\HealthRecordController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Database\DataStore.cs" />
@@ -143,7 +144,9 @@
     <Compile Include="Enums\Specialisation.cs" />
     <Compile Include="Exceptions\AdvanceBookingLimitException.cs" />
     <Compile Include="Exceptions\AppointmentConflictException.cs" />
+    <Compile Include="Exceptions\AppointmentNotCompletedException.cs" />
     <Compile Include="Exceptions\AppointmentTimeConflictException.cs" />
+    <Compile Include="Exceptions\HealthRecordAlreadyExistsException.cs" />
     <Compile Include="Exceptions\PastDateException.cs" />
     <Compile Include="Exceptions\PatientAppException.cs" />
     <Compile Include="Exceptions\PreviousDateException.cs" />
@@ -152,18 +155,23 @@
     </Compile>
     <Compile Include="Models\Appointments.cs" />
     <Compile Include="Models\Doctor.cs" />
+    <Compile Include="Models\HealthRecord.cs" />
     <Compile Include="Models\Patient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IAppointmentRepository.cs" />
     <Compile Include="Repositories\IDoctorRepository.cs" />
+    <Compile Include="Repositories\IHealthRecordRepository.cs" />
     <Compile Include="Repositories\Impl\AppointmentRepository.cs" />
     <Compile Include="Repositories\Impl\DoctorRepository.cs" />
+    <Compile Include="Repositories\Impl\HealthRecordRepository.cs" />
     <Compile Include="Repositories\IPatientRepository.cs" />
     <Compile Include="Repositories\Impl\PatientRepository.cs" />
     <Compile Include="Services\IAppointmentService.cs" />
     <Compile Include="Services\IDoctorService.cs" />
+    <Compile Include="Services\IHealthRecordService.cs" />
     <Compile Include="Services\Impl\AppointmentService.cs" />
     <Compile Include="Services\Impl\DoctorService.cs" />
+    <Compile Include="Services\Impl\HealthRecordService.cs" />
     <Compile Include="Services\IPatientService.cs" />
     <Compile Include="Services\Impl\PatientService.cs" />
   </ItemGroup>
@@ -231,6 +239,11 @@
     <Content Include="Views\Appointment\Index.cshtml" />
     <Content Include="Views\Appointment\Edit.cshtml" />
     <Content Include="Views\Appointment\Delete.cshtml" />
+    <Content Include="Views\HealthRecord\Index.cshtml" />
+    <Content Include="Views\HealthRecord\Create.cshtml" />
+    <Content Include="Views\HealthRecord\CreateFromAppointment.cshtml" />
+    <Content Include="Views\HealthRecord\Edit.cshtml" />
+    <Content Include="Views\HealthRecord\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

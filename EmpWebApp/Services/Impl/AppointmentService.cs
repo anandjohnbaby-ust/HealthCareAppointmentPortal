@@ -4,6 +4,7 @@ using HealthCareApp.Models;
 using HealthCareApp.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace HealthCareApp.Services.Impl
 {
@@ -165,6 +166,16 @@ namespace HealthCareApp.Services.Impl
             _repository.UpdateAppointment(
                 id,
                 appointment);
+        }
+
+        public List<Appointment> GetCompletedAppointments()
+        {
+            return _repository
+                .GetAll()
+                .Where(a =>
+                    a.Status ==
+                    AppointmentStatus.Completed)
+                .ToList();
         }
     }
 }

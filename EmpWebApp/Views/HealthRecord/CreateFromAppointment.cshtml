@@ -1,0 +1,116 @@
+﻿@model HealthCareApp.Models.HealthRecord
+
+@{
+    ViewBag.Title = "Create Health Record";
+}
+
+<h2>Create Health Record</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(
+        true,
+        "",
+        new { @class = "text-danger" })
+
+    @Html.HiddenFor(
+        m => m.AppointmentId)
+
+    @Html.HiddenFor(
+        m => m.VisitDate)
+
+    <div class="form-group">
+
+        <label>
+            Patient
+        </label>
+
+        <input type="text"
+               class="form-control"
+               value="@(Model != null && Model.Patient != null ? Model.Patient.FullName : "")"
+               readonly />
+
+    </div>
+
+    <div class="form-group">
+
+        <label>
+            Doctor
+        </label>
+
+        <input type="text"
+               class="form-control"
+               value="@(Model != null && Model.Doctor != null ? Model.Doctor.FullName : "")"
+               readonly />
+
+    </div>
+
+    <div class="form-group">
+
+        @Html.LabelFor(
+            m => m.Diagnosis)
+
+        @Html.TextBoxFor(
+            m => m.Diagnosis,
+            new
+            {
+                @class = "form-control"
+            })
+
+        @Html.ValidationMessageFor(
+            m => m.Diagnosis,
+            "",
+            new { @class = "text-danger" })
+
+    </div>
+
+    <div class="form-group">
+
+        @Html.LabelFor(
+            m => m.Prescription)
+
+        @Html.TextAreaFor(
+            m => m.Prescription,
+            new
+            {
+                @class = "form-control",
+                rows = 3
+            })
+
+        @Html.ValidationMessageFor(
+            m => m.Prescription,
+            "",
+            new { @class = "text-danger" })
+
+    </div>
+
+    <div class="form-group">
+
+        @Html.LabelFor(
+            m => m.Notes)
+
+        @Html.TextAreaFor(
+            m => m.Notes,
+            new
+            {
+                @class = "form-control",
+                rows = 3
+            })
+
+    </div>
+
+    <br />
+
+    <input type="submit"
+           value="Save Record"
+           class="btn btn-primary" />
+
+    @Html.ActionLink(
+        "Cancel",
+        "Index",
+        null,
+        new
+        {
+            @class = "btn btn-secondary"
+        })
+}

@@ -108,6 +108,41 @@
 
         </div>
 
+        <div class="col-md-3">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body text-center">
+
+                    <h1>📋</h1>
+
+                    <h4 class="card-title">
+                        Health Records
+                    </h4>
+
+                    <p class="card-text">
+                        Create, update and manage
+                        patient health records,
+                        diagnoses and prescriptions.
+                    </p>
+
+                    @Html.ActionLink(
+                        "Manage Records",
+                        "Index",
+                        "HealthRecord",
+                        null,
+                        new
+                        {
+                            @class =
+                            "btn btn-info"
+                        })
+
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
 
 </div>

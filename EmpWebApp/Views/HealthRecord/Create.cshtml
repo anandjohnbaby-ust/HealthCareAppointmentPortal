@@ -1,0 +1,70 @@
+﻿@model IEnumerable<HealthCareApp.Models.Appointment>
+
+@{
+    ViewBag.Title = "Completed Appointments";
+}
+
+<h2>Completed Appointments</h2>
+
+<table class="table table-bordered">
+
+    <tr>
+        <th>Appointment Id</th>
+        <th>Patient</th>
+        <th>Doctor</th>
+        <th>Date</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @item.AppointmentId
+            </td>
+
+            <td>
+                @item.Patient.FullName
+            </td>
+
+            <td>
+                @item.Doctor.FullName
+            </td>
+
+            <td>
+                @item.ScheduledDate.ToShortDateString()
+            </td>
+
+            <td>
+
+                @Html.ActionLink(
+                    "Create Record",
+                    "CreateFromAppointment",
+                    new
+                    {
+                        appointmentId =
+                        item.AppointmentId
+                    },
+                    new
+                    {
+                        @class =
+                        "btn btn-success"
+                    })
+
+            </td>
+
+        </tr>
+    }
+
+</table>
+
+@Html.ActionLink(
+    "Back",
+    "Index",
+    null,
+    new
+    {
+        @class =
+        "btn btn-secondary"
+    })

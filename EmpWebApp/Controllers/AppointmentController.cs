@@ -188,14 +188,6 @@ namespace HealthCareApp.Controllers
             return RedirectToAction("Index");
         }
 
-        //public ActionResult Cancel(int id)
-        //{
-        //    Appointment appointment =
-        //        _appointmentService
-        //        .GetById(id);
-
-        //    return View(appointment);
-        //}
         public ActionResult Cancel(int id)
         {
             _appointmentService

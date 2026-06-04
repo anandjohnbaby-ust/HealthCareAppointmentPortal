@@ -13,5 +13,8 @@ namespace HealthCareApp.Database
 
         public List<Appointment> Appointments { get; set; }
             = new List<Appointment>();
+
+        public List<HealthRecord> HealthRecords { get; set; }
+            = new List<HealthRecord>();
     }
 }

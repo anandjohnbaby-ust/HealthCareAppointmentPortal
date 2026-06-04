@@ -25,5 +25,8 @@ namespace HealthCareApp.Services
         void CancelAppointment(
             int id,
             string reason);
+
+        List<Appointment>
+            GetCompletedAppointments();
     }
 }

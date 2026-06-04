@@ -13,22 +13,14 @@ namespace HealthCareApp
     {
         public static void RegisterComponents()
         {
-            var container = new UnityContainer();
+            var container =
+                new UnityContainer();
 
-            container.RegisterType<IPatientRepository, PatientRepository>();
+            // Shared Data Store
+            container.RegisterSingleton<
+                DataStore>();
 
-            container.RegisterType<IPatientService, PatientService>();
-
-            container.RegisterSingleton<DataStore>();
-
-            container.RegisterType<
-                IDoctorRepository,
-                DoctorRepository>();
-
-            container.RegisterType<
-                IDoctorService,
-                DoctorService>();
-
+            // Patient
             container.RegisterType<
                 IPatientRepository,
                 PatientRepository>();
@@ -37,16 +29,36 @@ namespace HealthCareApp
                 IPatientService,
                 PatientService>();
 
+            // Doctor
             container.RegisterType<
-    IAppointmentRepository,
-    AppointmentRepository>();
+                IDoctorRepository,
+                DoctorRepository>();
+
+            container.RegisterType<
+                IDoctorService,
+                DoctorService>();
+
+            // Appointment
+            container.RegisterType<
+                IAppointmentRepository,
+                AppointmentRepository>();
 
             container.RegisterType<
                 IAppointmentService,
                 AppointmentService>();
 
+            // Health Record
+            container.RegisterType<
+                IHealthRecordRepository,
+                HealthRecordRepository>();
+
+            container.RegisterType<
+                IHealthRecordService,
+                HealthRecordService>();
+
             DependencyResolver.SetResolver(
-                new UnityDependencyResolver(container));
+                new UnityDependencyResolver(
+                    container));
         }
     }
 }
