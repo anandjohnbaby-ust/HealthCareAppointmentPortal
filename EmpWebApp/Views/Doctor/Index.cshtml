@@ -1,0 +1,107 @@
+﻿@*@model List<HealthCareApp.Models.Doctor>
+
+    @{
+        ViewBag.Title = "Index";
+    }
+
+    <h2 class="text-primary">
+        Doctor Details
+    </h2>
+
+    @Html.ActionLink(
+        "Add Doctor",
+        "Create",
+        null,
+        new { @class = "btn btn-primary mb-3" })
+
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Doctor Id</th>
+                <th>Full Name</th>
+                <th>Specialisation</th>
+                <th>Experience</th>
+                <th>Consultation Fee</th>
+                <th>Available</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var doctor in Model)
+            {
+                <tr>
+                    <td>@doctor.DoctorId</td>
+                    <td>@doctor.FullName</td>
+                    <td>@doctor.Specialisation</td>
+                    <td>@doctor.YearsOfExperience</td>
+                    <td>@doctor.ConsultationFee</td>
+                    <td>
+                        @(doctor.IsActive
+                            ? "Yes"
+                            : "No")
+                    </td>
+
+                    <td>
+                        @Html.ActionLink(
+                            "Edit",
+                            "Edit",
+                            new
+                            {
+                                id =
+                                doctor.DoctorId
+                            },
+                            new
+                            {
+                                @class =
+                                "btn btn-outline-primary btn-sm me-1"
+                            })
+
+                        @Html.ActionLink(
+                            "Delete",
+                            "Delete",
+                            new
+                            {
+                                id =
+                                doctor.DoctorId
+                            },
+                            new
+                            {
+                                @class =
+                                "btn btn-outline-danger btn-sm"
+                            })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>*@
+
+<h2 class="text-primary">
+    Doctor Details
+</h2>
+
+<div class="mb-3">
+
+    @Html.ActionLink(
+        "Add Doctor",
+        "Create",
+        "Doctor",
+        null,
+        new
+        {
+            @class =
+            "btn btn-primary me-2"
+        })
+
+    @Html.ActionLink(
+        "Search By Specialisation",
+        "Search",
+        "Doctor",
+        null,
+        new
+        {
+            @class =
+            "btn btn-success"
+        })
+
+</div>

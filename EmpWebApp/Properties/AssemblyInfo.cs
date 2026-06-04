@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("EmpWebApp")]
+[assembly: AssemblyTitle("HealthCare Appointment Portal")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("HP Inc.")]
-[assembly: AssemblyProduct("EmpWebApp")]
+[assembly: AssemblyProduct("HealthCare Appointment Portal")]
 [assembly: AssemblyCopyright("Copyright © HP Inc. 2026")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

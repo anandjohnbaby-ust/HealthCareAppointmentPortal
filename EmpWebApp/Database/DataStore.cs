@@ -1,0 +1,17 @@
+﻿using HealthCareApp.Models;
+using System.Collections.Generic;
+
+namespace HealthCareApp.Database
+{
+    public class DataStore
+    {
+        public List<Patient> Patients { get; set; }
+            = new List<Patient>();
+
+        public List<Doctor> Doctors { get; set; }
+            = new List<Doctor>();
+
+        public List<Appointment> Appointments { get; set; }
+            = new List<Appointment>();
+    }
+}

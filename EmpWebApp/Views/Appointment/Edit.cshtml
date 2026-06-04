@@ -1,0 +1,59 @@
+﻿@model HealthCareApp.Models.Appointment
+
+<h2 class="text-success">
+    Update Appointment
+</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(
+        m => m.AppointmentId)
+
+    @Html.DropDownListFor(
+        m => m.PatientId,
+        (SelectList)ViewBag.Patients,
+        new
+        {
+            @class =
+            "form-control mb-2"
+        })
+
+    @Html.DropDownListFor(
+        m => m.DoctorId,
+        (SelectList)ViewBag.Doctors,
+        new
+        {
+            @class =
+            "form-control mb-2"
+        })
+
+    @Html.TextBoxFor(
+        m => m.ScheduledDate,
+        "{0:yyyy-MM-dd}",
+        new
+        {
+            type = "date",
+            @class =
+            "form-control mb-2"
+        })
+
+    @Html.TextBoxFor(
+        m => m.TimeSlot,
+        new
+        {
+            @class =
+            "form-control mb-2"
+        })
+
+    @Html.EnumDropDownListFor(
+        m => m.Status,
+        new
+        {
+            @class =
+            "form-control mb-3"
+        })
+
+    <button class="btn btn-primary">
+        Update Appointment
+    </button>
+}

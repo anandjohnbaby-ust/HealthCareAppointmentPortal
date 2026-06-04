@@ -1,27 +1,52 @@
-using EmpWebApp.Repositories;
-using EmpWebApp.Repositories.Impl;
-using EmpWebApp.Services;
-using EmpWebApp.Services.Impl;
+using HealthCareApp.Database;
+using HealthCareApp.Repositories;
+using HealthCareApp.Repositories.Impl;
+using HealthCareApp.Services;
+using HealthCareApp.Services.Impl;
 using System.Web.Mvc;
 using Unity;
 using Unity.Mvc5;
 
-namespace EmpWebApp
+namespace HealthCareApp
 {
     public static class UnityConfig
     {
         public static void RegisterComponents()
         {
-			var container = new UnityContainer();
-            container.RegisterType<IEmployeeRepository, EmployeeRepository>();
-            container.RegisterType<IEmployeeService,EmployeeService>();
-            
-            // register all your components with the container here
-            // it is NOT necessary to register your controllers
-            
-            // e.g. container.RegisterType<ITestService, TestService>();
-            
-            DependencyResolver.SetResolver(new UnityDependencyResolver(container));
+            var container = new UnityContainer();
+
+            container.RegisterType<IPatientRepository, PatientRepository>();
+
+            container.RegisterType<IPatientService, PatientService>();
+
+            container.RegisterSingleton<DataStore>();
+
+            container.RegisterType<
+                IDoctorRepository,
+                DoctorRepository>();
+
+            container.RegisterType<
+                IDoctorService,
+                DoctorService>();
+
+            container.RegisterType<
+                IPatientRepository,
+                PatientRepository>();
+
+            container.RegisterType<
+                IPatientService,
+                PatientService>();
+
+            container.RegisterType<
+    IAppointmentRepository,
+    AppointmentRepository>();
+
+            container.RegisterType<
+                IAppointmentService,
+                AppointmentService>();
+
+            DependencyResolver.SetResolver(
+                new UnityDependencyResolver(container));
         }
     }
 }

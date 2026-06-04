@@ -1,0 +1,49 @@
+﻿@model HealthCareApp.Models.Appointment
+
+<h2 class="text-danger">
+    Delete Appointment?
+</h2>
+
+<table class="table table-striped">
+
+    <tr>
+        <td>Patient</td>
+        <td>@Model.Patient.FullName</td>
+    </tr>
+
+    <tr>
+        <td>Doctor</td>
+        <td>@Model.Doctor.FullName</td>
+    </tr>
+
+    <tr>
+        <td>Date</td>
+        <td>@Model.ScheduledDate</td>
+    </tr>
+
+    <tr>
+        <td>Time</td>
+        <td>@Model.TimeSlot</td>
+    </tr>
+
+    <tr>
+        <td>Status</td>
+        <td>@Model.Status</td>
+    </tr>
+
+</table>
+
+@using (Html.BeginForm(
+    "Delete",
+    "Appointment",
+    new
+    {
+        id =
+        Model.AppointmentId
+    },
+    FormMethod.Post))
+{
+    <button class="btn btn-danger">
+        Delete
+    </button>
+}

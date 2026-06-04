@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace EmpWebApp
+namespace HealthCareApp
 {
     public class BundleConfig
     {
