@@ -13,8 +13,7 @@
         null,
         new
         {
-            @class =
-            "btn btn-success"
+            @class = "btn btn-success"
         })
 </p>
 
@@ -25,7 +24,9 @@
         <th>Patient</th>
         <th>Doctor</th>
         <th>Diagnosis</th>
-        <th></th>
+        <th>Prescription</th>
+        <th>Notes</th>
+        <th>Actions</th>
     </tr>
 
     @foreach (var item in Model)
@@ -37,19 +38,27 @@
             </td>
 
             <td>
-                    @(item.Patient != null
-            ? item.Patient.FullName
-            : "N/A")
+                @(item.Patient != null
+                    ? item.Patient.FullName
+                    : "N/A")
             </td>
 
             <td>
                 @(item.Doctor != null
-        ? item.Doctor.FullName
-        : "N/A")
+                    ? item.Doctor.FullName
+                    : "N/A")
             </td>
 
             <td>
                 @item.Diagnosis
+            </td>
+
+            <td>
+                @item.Prescription
+            </td>
+
+            <td>
+                @item.Notes
             </td>
 
             <td>
@@ -59,8 +68,7 @@
                     "Edit",
                     new
                     {
-                        id =
-                        item.RecordId
+                        id = item.RecordId
                     })
 
                 |
@@ -70,8 +78,7 @@
                     "Delete",
                     new
                     {
-                        id =
-                        item.RecordId
+                        id = item.RecordId
                     })
 
             </td>
