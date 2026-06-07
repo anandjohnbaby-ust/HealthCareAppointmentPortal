@@ -21,5 +21,7 @@ namespace HealthCareApp.Services
 
         void DeleteRecord(
             int id);
+
+        List<HealthRecord> GetByPatientId(int patientId);
     }
 }

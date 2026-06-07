@@ -3,6 +3,7 @@ using HealthCareApp.Models;
 using HealthCareApp.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace HealthCareApp.Services.Impl
 {
@@ -15,8 +16,23 @@ namespace HealthCareApp.Services.Impl
             _repository = repository;
         }
 
+        //public void AddPatient(Patient patient)
+        //{
+        //    _repository.AddPatient(patient);
+        //}
         public void AddPatient(Patient patient)
         {
+            bool exists = _repository
+                .GetAll()
+                .Any(p => p.Email.ToLower() ==
+                          patient.Email.ToLower());
+
+            if (exists)
+            {
+                throw new Exception(
+                    "Patient with this email already exists.");
+            }
+
             _repository.AddPatient(patient);
         }
 

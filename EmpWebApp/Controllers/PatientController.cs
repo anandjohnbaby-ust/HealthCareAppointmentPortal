@@ -1,5 +1,6 @@
 ﻿using HealthCareApp.Models;
 using HealthCareApp.Services;
+using System;
 using System.Web.Mvc;
 
 namespace HealthCareApp.Controllers
@@ -8,9 +9,13 @@ namespace HealthCareApp.Controllers
     {
         private readonly IPatientService _service;
 
-        public PatientController()
+        private readonly IHealthRecordService _recordService;
+        public PatientController(
+            IPatientService service,
+            IHealthRecordService recordService)
         {
-
+            _service = service;
+            _recordService = recordService;
         }
 
         public PatientController(IPatientService service)
@@ -37,9 +42,18 @@ namespace HealthCareApp.Controllers
                 return View(patient);
             }
 
-            _service.AddPatient(patient);
+            try
+            {
+                _service.AddPatient(patient);
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+
+                return View(patient);
+            }
         }
 
         // GET: Patient/Edit/1
@@ -83,6 +97,23 @@ namespace HealthCareApp.Controllers
         {
             _service.DeletePatient(id);
             return RedirectToAction("Index");
+        }
+
+        public ActionResult History(int id)
+        {
+            var patient = _service.GetById(id);
+
+            if (patient == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.PatientName = patient.FullName;
+
+            var history =
+                _recordService.GetByPatientId(id);
+
+            return View(history);
         }
     }
 }

@@ -58,7 +58,17 @@
                         new
                         {
                             @class =
-                            "btn btn-outline-danger btn-sm"
+                            "btn btn-outline-danger btn-sm me-1"
+                        })
+
+                    @Html.ActionLink(
+                        "History",
+                        "History",
+                        new { id = patient.PatientId },
+                        new
+                        {
+                            @class =
+                            "btn btn-outline-success btn-sm"
                         })
                 </td>
             </tr>

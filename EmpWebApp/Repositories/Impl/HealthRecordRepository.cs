@@ -2,6 +2,8 @@
 using HealthCareApp.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
+
 
 namespace HealthCareApp.Repositories
 {
@@ -17,9 +19,16 @@ namespace HealthCareApp.Repositories
             _context = context;
         }
 
+        //public List<HealthRecord> GetAll()
+        //{
+        //    return _context.HealthRecords
+        //        .ToList();
+        //}
         public List<HealthRecord> GetAll()
         {
             return _context.HealthRecords
+                .Include("Doctor")
+                .Include("Patient")
                 .ToList();
         }
 

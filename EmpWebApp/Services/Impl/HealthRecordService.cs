@@ -1,6 +1,7 @@
 ﻿using HealthCareApp.Models;
 using HealthCareApp.Repositories;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace HealthCareApp.Services
 {
@@ -63,6 +64,14 @@ namespace HealthCareApp.Services
             int id)
         {
             _repository.DeleteRecord(id);
+        }
+        public List<HealthRecord> GetByPatientId(int patientId)
+        {
+            return _repository
+                .GetAll()
+                .Where(r => r.PatientId == patientId)
+                .OrderByDescending(r => r.VisitDate)
+                .ToList();
         }
     }
 }
