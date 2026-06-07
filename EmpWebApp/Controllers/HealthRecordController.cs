@@ -183,51 +183,6 @@ namespace HealthCareApp.Controllers
                 "Index");
         }
 
-        //[HttpPost]
-        //public ActionResult CreateFromAppointment(
-        //    HealthRecord record)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View(record);
-        //    }
-
-        //    var appointment =
-        //        _appointmentService
-        //        .GetById(
-        //            record.AppointmentId);
-
-        //    if (appointment == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-
-        //    appointment.Patient =
-        //        _patientService
-        //        .GetById(
-        //            appointment.PatientId);
-
-        //    appointment.Doctor =
-        //        _doctorService
-        //        .GetById(
-        //            appointment.DoctorId);
-
-        //    record.Patient =
-        //        appointment.Patient;
-
-        //    record.Doctor =
-        //        appointment.Doctor;
-
-        //    record.VisitDate =
-        //        appointment.ScheduledDate;
-
-        //    _recordService.AddRecord(
-        //        record);
-
-        //    return RedirectToAction(
-        //        "Index");
-        //}
-
         public ActionResult Edit(int id)
         {
             var record =

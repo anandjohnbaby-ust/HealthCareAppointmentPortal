@@ -19,11 +19,6 @@ namespace HealthCareApp.Repositories
             _context = context;
         }
 
-        //public List<HealthRecord> GetAll()
-        //{
-        //    return _context.HealthRecords
-        //        .ToList();
-        //}
         public List<HealthRecord> GetAll()
         {
             return _context.HealthRecords

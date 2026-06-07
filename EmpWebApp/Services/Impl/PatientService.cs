@@ -16,10 +16,6 @@ namespace HealthCareApp.Services.Impl
             _repository = repository;
         }
 
-        //public void AddPatient(Patient patient)
-        //{
-        //    _repository.AddPatient(patient);
-        //}
         public void AddPatient(Patient patient)
         {
             bool exists = _repository
