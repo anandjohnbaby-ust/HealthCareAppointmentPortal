@@ -5,15 +5,7 @@ namespace HealthCareApp.Models
 {
     public class Patient
     {
-        private static int _patientCounter = 1;
-
         public int PatientId { get; set; }
-            = _patientCounter++;
-
-        public static void SetPatientCounter(int value)
-        {
-            _patientCounter = value;
-        }
 
         [Required(ErrorMessage = "Full Name is required")]
         [RegularExpression(

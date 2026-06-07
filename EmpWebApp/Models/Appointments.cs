@@ -6,15 +6,8 @@ namespace HealthCareApp.Models
 {
     public class Appointment
     {
-        private static int _appointmentCounter = 1;
-
         public int AppointmentId { get; set; }
-            = _appointmentCounter++;
 
-        public static void SetAppointmentCounter(int value)
-        {
-            _appointmentCounter = value;
-        }
 
         [Required(ErrorMessage = "Patient is required")]
         public int PatientId { get; set; }

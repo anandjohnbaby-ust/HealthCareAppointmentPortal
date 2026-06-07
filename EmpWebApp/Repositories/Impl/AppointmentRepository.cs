@@ -1,8 +1,9 @@
-﻿using HealthCareApp.Database;
-using HealthCareApp.Models;
+﻿using HealthCareApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using HealthCareApp.Data;
+using System.Data.Entity;
 
 namespace HealthCareApp.Repositories.Impl
 {
@@ -10,22 +11,22 @@ namespace HealthCareApp.Repositories.Impl
         : IAppointmentRepository
     {
         private readonly
-            DataStore _dataStore;
+            HealthCareDbContext _context;
 
         public AppointmentRepository(
-            DataStore dataStore)
+            HealthCareDbContext context)
         {
-            _dataStore = dataStore;
+            _context = context;
         }
 
         public List<Appointment> GetAll()
         {
-            return _dataStore.Appointments;
+            return _context.Appointments.ToList();
         }
 
         public Appointment GetById(int id)
         {
-            return _dataStore.Appointments
+            return _context.Appointments
                 .FirstOrDefault(
                     a => a.AppointmentId == id);
         }
@@ -33,8 +34,9 @@ namespace HealthCareApp.Repositories.Impl
         public void AddAppointment(
             Appointment appointment)
         {
-            _dataStore.Appointments
+            _context.Appointments
                 .Add(appointment);
+            _context.SaveChanges();
         }
 
         public void UpdateAppointment(
@@ -42,7 +44,7 @@ namespace HealthCareApp.Repositories.Impl
             Appointment appointment)
         {
             Appointment existingAppointment =
-                _dataStore.Appointments
+                _context.Appointments
                 .FirstOrDefault(
                     a => a.AppointmentId == id);
 
@@ -68,20 +70,23 @@ namespace HealthCareApp.Repositories.Impl
 
             existingAppointment.CancellationReason =
                 appointment.CancellationReason;
+
+            _context.SaveChanges();
         }
 
         public void DeleteAppointment(
             int id)
         {
             Appointment appointment =
-                _dataStore.Appointments
+                _context.Appointments
                 .FirstOrDefault(
                     a => a.AppointmentId == id);
 
             if (appointment != null)
             {
-                _dataStore.Appointments
+                _context.Appointments
                     .Remove(appointment);
+                _context.SaveChanges();
             }
         }
 
@@ -91,12 +96,15 @@ namespace HealthCareApp.Repositories.Impl
                 DateTime date,
                 string timeSlot)
         {
-            return _dataStore.Appointments
+            return _context.Appointments
                 .FirstOrDefault(a =>
                     a.DoctorId == doctorId
                     &&
-                    a.ScheduledDate.Date ==
-                    date.Date
+                    DbFunctions.TruncateTime(
+                        a.ScheduledDate)
+                    ==
+                    DbFunctions.TruncateTime(
+                        date)
                     &&
                     a.TimeSlot ==
                     timeSlot);

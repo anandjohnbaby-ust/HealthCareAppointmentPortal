@@ -1,4 +1,4 @@
-﻿using HealthCareApp.Database;
+﻿using HealthCareApp.Data;
 using HealthCareApp.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,22 +8,23 @@ namespace HealthCareApp.Repositories.Impl
     public class PatientRepository
         : IPatientRepository
     {
-        private readonly DataStore _dataStore;
+        private readonly HealthCareDbContext _context;
 
         public PatientRepository(
-            DataStore dataStore)
+            HealthCareDbContext context)
         {
-            _dataStore = dataStore;
+            _context = context;
         }
 
         public List<Patient> GetAll()
         {
-            return _dataStore.Patients;
+            return _context.Patients
+                .ToList();
         }
 
         public Patient GetById(int id)
         {
-            return _dataStore.Patients
+            return _context.Patients
                 .FirstOrDefault(
                     p => p.PatientId == id);
         }
@@ -31,8 +32,10 @@ namespace HealthCareApp.Repositories.Impl
         public void AddPatient(
             Patient patient)
         {
-            _dataStore.Patients
+            _context.Patients
                 .Add(patient);
+
+            _context.SaveChanges();
         }
 
         public void UpdatePatient(
@@ -40,7 +43,7 @@ namespace HealthCareApp.Repositories.Impl
             Patient patient)
         {
             Patient existingPatient =
-                _dataStore.Patients
+                _context.Patients
                 .FirstOrDefault(
                     p => p.PatientId == id);
 
@@ -66,20 +69,24 @@ namespace HealthCareApp.Repositories.Impl
 
             existingPatient.InsuranceId =
                 patient.InsuranceId;
+
+            _context.SaveChanges();
         }
 
         public void DeletePatient(
             int id)
         {
             Patient patient =
-                _dataStore.Patients
+                _context.Patients
                 .FirstOrDefault(
                     p => p.PatientId == id);
 
             if (patient != null)
             {
-                _dataStore.Patients
+                _context.Patients
                     .Remove(patient);
+
+                _context.SaveChanges();
             }
         }
     }

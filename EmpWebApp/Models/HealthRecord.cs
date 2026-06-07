@@ -7,30 +7,20 @@ namespace HealthCareApp.Models
     [ExcludeFromCodeCoverage]
     public class HealthRecord
     {
-        private static int _recordCounter = 1;
 
+        [Key]
         public int RecordId { get; set; }
-            = _recordCounter++;
-
-        public static void SetRecordCounter(
-            int value)
-        {
-            _recordCounter = value;
-        }
 
         [Required(
             ErrorMessage =
             "Appointment is required")]
         public int AppointmentId { get; set; }
 
-        //[Required(
-        //    ErrorMessage =
-        //    "Patient is required")]
+        public int PatientId { get; set; }
+        public int DoctorId { get; set; }
+
         public Patient Patient { get; set; }
 
-        //[Required(
-        //    ErrorMessage =
-        //    "Doctor is required")]
         public Doctor Doctor { get; set; }
 
         [Required(

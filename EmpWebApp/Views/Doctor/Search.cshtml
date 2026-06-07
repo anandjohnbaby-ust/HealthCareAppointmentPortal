@@ -62,7 +62,7 @@
                 <th>Specialisation</th>
                 <th>Experience</th>
                 <th>Consultation Fee</th>
-                <th>Available</th>
+                @*<th>Available</th>*@
             </tr>
         </thead>
 
@@ -76,11 +76,11 @@
                     <td>@doctor.Specialisation</td>
                     <td>@doctor.YearsOfExperience</td>
                     <td>@doctor.ConsultationFee</td>
-                    <td>
+                    @*<td>
                         @(doctor.IsActive
                             ? "Yes"
                             : "No")
-                    </td>
+                    </td>*@
                 </tr>
             }
 

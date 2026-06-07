@@ -1,4 +1,4 @@
-﻿using HealthCareApp.Database;
+﻿using HealthCareApp.Data;
 using HealthCareApp.Enums;
 using HealthCareApp.Models;
 using System.Collections.Generic;
@@ -9,22 +9,22 @@ namespace HealthCareApp.Repositories.Impl
     public class DoctorRepository
         : IDoctorRepository
     {
-        private readonly DataStore _dataStore;
+        private readonly HealthCareDbContext _context;
 
         public DoctorRepository(
-            DataStore dataStore)
+            HealthCareDbContext context)
         {
-            _dataStore = dataStore;
+            _context = context;
         }
 
         public List<Doctor> GetAll()
         {
-            return _dataStore.Doctors;
+            return _context.Doctors.ToList();
         }
 
         public Doctor GetById(int id)
         {
-            return _dataStore.Doctors
+            return _context.Doctors
                 .FirstOrDefault(
                     d => d.DoctorId == id);
         }
@@ -32,8 +32,10 @@ namespace HealthCareApp.Repositories.Impl
         public void AddDoctor(
             Doctor doctor)
         {
-            _dataStore.Doctors
+            _context.Doctors
                 .Add(doctor);
+
+            _context.SaveChanges();
         }
 
         public void UpdateDoctor(
@@ -41,7 +43,7 @@ namespace HealthCareApp.Repositories.Impl
             Doctor doctor)
         {
             Doctor existingDoctor =
-                _dataStore.Doctors
+                _context.Doctors
                 .FirstOrDefault(
                     d => d.DoctorId == id);
 
@@ -64,31 +66,36 @@ namespace HealthCareApp.Repositories.Impl
 
             existingDoctor.IsActive =
                 doctor.IsActive;
+
+            _context.SaveChanges();
         }
 
         public void DeleteDoctor(
             int id)
         {
             Doctor doctor =
-                _dataStore.Doctors
+                _context.Doctors
                 .FirstOrDefault(
                     d => d.DoctorId == id);
 
             if (doctor != null)
             {
-                _dataStore.Doctors
+                _context.Doctors
                     .Remove(doctor);
+
+                _context.SaveChanges();
             }
         }
+
         public List<Doctor>
         GetDoctorsBySpecialisation(
             Specialisation specialisation)
-            {
-                return _dataStore.Doctors
-                    .Where(d =>
-                        d.Specialisation ==
-                        specialisation)
-                    .ToList();
-            }
+        {
+            return _context.Doctors
+                .Where(d =>
+                    d.Specialisation ==
+                    specialisation)
+                .ToList();
+        }
     }
 }

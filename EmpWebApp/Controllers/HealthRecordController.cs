@@ -146,7 +146,7 @@ namespace HealthCareApp.Controllers
 
         [HttpPost]
         public ActionResult CreateFromAppointment(
-            HealthRecord record)
+    HealthRecord record)
         {
             if (!ModelState.IsValid)
             {
@@ -163,24 +163,18 @@ namespace HealthCareApp.Controllers
                 return HttpNotFound();
             }
 
-            appointment.Patient =
-                _patientService
-                .GetById(
-                    appointment.PatientId);
+            record.PatientId =
+                appointment.PatientId;
 
-            appointment.Doctor =
-                _doctorService
-                .GetById(
-                    appointment.DoctorId);
-
-            record.Patient =
-                appointment.Patient;
-
-            record.Doctor =
-                appointment.Doctor;
+            record.DoctorId =
+                appointment.DoctorId;
 
             record.VisitDate =
                 appointment.ScheduledDate;
+
+            record.Patient = null;
+
+            record.Doctor = null;
 
             _recordService.AddRecord(
                 record);
@@ -188,6 +182,51 @@ namespace HealthCareApp.Controllers
             return RedirectToAction(
                 "Index");
         }
+
+        //[HttpPost]
+        //public ActionResult CreateFromAppointment(
+        //    HealthRecord record)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View(record);
+        //    }
+
+        //    var appointment =
+        //        _appointmentService
+        //        .GetById(
+        //            record.AppointmentId);
+
+        //    if (appointment == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+
+        //    appointment.Patient =
+        //        _patientService
+        //        .GetById(
+        //            appointment.PatientId);
+
+        //    appointment.Doctor =
+        //        _doctorService
+        //        .GetById(
+        //            appointment.DoctorId);
+
+        //    record.Patient =
+        //        appointment.Patient;
+
+        //    record.Doctor =
+        //        appointment.Doctor;
+
+        //    record.VisitDate =
+        //        appointment.ScheduledDate;
+
+        //    _recordService.AddRecord(
+        //        record);
+
+        //    return RedirectToAction(
+        //        "Index");
+        //}
 
         public ActionResult Edit(int id)
         {

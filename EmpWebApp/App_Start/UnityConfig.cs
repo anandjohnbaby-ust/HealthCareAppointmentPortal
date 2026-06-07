@@ -1,4 +1,3 @@
-using HealthCareApp.Database;
 using HealthCareApp.Repositories;
 using HealthCareApp.Repositories.Impl;
 using HealthCareApp.Services;
@@ -16,9 +15,6 @@ namespace HealthCareApp
             var container =
                 new UnityContainer();
 
-            // Shared Data Store
-            container.RegisterSingleton<
-                DataStore>();
 
             // Patient
             container.RegisterType<

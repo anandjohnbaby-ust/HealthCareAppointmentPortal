@@ -1,4 +1,4 @@
-﻿using HealthCareApp.Database;
+﻿using HealthCareApp.Data;
 using HealthCareApp.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,22 +9,23 @@ namespace HealthCareApp.Repositories
         : IHealthRecordRepository
     {
         private readonly
-            DataStore _dataStore;
+            HealthCareDbContext _context;
 
         public HealthRecordRepository(
-            DataStore dataStore)
+            HealthCareDbContext context)
         {
-            _dataStore = dataStore;
+            _context = context;
         }
 
         public List<HealthRecord> GetAll()
         {
-            return _dataStore.HealthRecords;
+            return _context.HealthRecords
+                .ToList();
         }
 
         public HealthRecord GetById(int id)
         {
-            return _dataStore.HealthRecords
+            return _context.HealthRecords
                 .FirstOrDefault(
                     h => h.RecordId == id);
         }
@@ -32,7 +33,7 @@ namespace HealthCareApp.Repositories
         public HealthRecord GetByAppointmentId(
             int appointmentId)
         {
-            return _dataStore.HealthRecords
+            return _context.HealthRecords
                 .FirstOrDefault(
                     h => h.AppointmentId
                     == appointmentId);
@@ -41,8 +42,10 @@ namespace HealthCareApp.Repositories
         public void AddRecord(
             HealthRecord record)
         {
-            _dataStore.HealthRecords
+            _context.HealthRecords
                 .Add(record);
+
+            _context.SaveChanges();
         }
 
         public void UpdateRecord(
@@ -68,6 +71,8 @@ namespace HealthCareApp.Repositories
 
             existing.VisitDate =
                 record.VisitDate;
+
+            _context.SaveChanges();
         }
 
         public void DeleteRecord(
@@ -78,8 +83,10 @@ namespace HealthCareApp.Repositories
 
             if (record != null)
             {
-                _dataStore.HealthRecords
+                _context.HealthRecords
                     .Remove(record);
+
+                _context.SaveChanges();
             }
         }
     }
