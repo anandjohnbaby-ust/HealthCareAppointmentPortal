@@ -17,13 +17,17 @@
     <dt>Patient</dt>
 
     <dd>
-        @Model.Patient.FullName
+        @(Model.Patient != null
+            ? Model.Patient.FullName
+            : "N/A")
     </dd>
 
     <dt>Doctor</dt>
 
     <dd>
-        @Model.Doctor.FullName
+        @(Model.Doctor != null
+            ? Model.Doctor.FullName
+            : "N/A")
     </dd>
 
     <dt>Diagnosis</dt>
@@ -49,7 +53,6 @@
         null,
         new
         {
-            @class =
-            "btn btn-secondary"
+            @class = "btn btn-secondary"
         })
 }

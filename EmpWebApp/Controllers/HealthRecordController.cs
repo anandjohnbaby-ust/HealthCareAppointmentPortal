@@ -268,6 +268,14 @@ namespace HealthCareApp.Controllers
                 return HttpNotFound();
             }
 
+            record.Patient =
+                _patientService.GetById(
+                    record.PatientId);
+
+            record.Doctor =
+                _doctorService.GetById(
+                    record.DoctorId);
+
             return View(record);
         }
 

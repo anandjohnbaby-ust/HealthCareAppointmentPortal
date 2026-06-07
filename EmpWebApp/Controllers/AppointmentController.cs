@@ -129,11 +129,40 @@ namespace HealthCareApp.Controllers
                     "PatientId",
                     "FullName");
 
+            //ViewBag.Doctors =
+            //    new SelectList(
+            //        _doctorService.GetAll(),
+            //        "DoctorId",
+            //        "FullName");
+
+            var doctors =
+    _doctorService
+        .GetAll()
+        .Where(d => d.IsActive)
+        .Select(d => new
+        {
+            d.DoctorId,
+            DisplayName =
+                d.Specialisation +
+                " - " +
+                d.FullName
+        })
+        .ToList();
+
             ViewBag.Doctors =
                 new SelectList(
-                    _doctorService.GetAll(),
+                    doctors,
                     "DoctorId",
-                    "FullName");
+                    "DisplayName");
+
+            //ViewBag.Doctors =
+            //    new SelectList(
+            //        _doctorService
+            //            .GetAll()
+            //            .Where(d => d.IsActive)
+            //            .ToList(),
+            //        "DoctorId",
+            //        "FullName");
 
             ViewBag.Statuses =
                 Enum.GetValues(

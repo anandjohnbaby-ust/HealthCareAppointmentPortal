@@ -10,6 +10,8 @@
 <div class="col-6">
     @using (Html.BeginForm())
     {
+        @Html.AntiForgeryToken()
+
         @Html.ValidationSummary(
             true,
             "",
@@ -86,13 +88,13 @@
         </div>
 
         @*<div class="mb-3">
-            <label class="fw-bold">
-                Available
-            </label>
+                <label class="fw-bold">
+                    Available
+                </label>
 
-            @Html.CheckBoxFor(
-                m => m.IsActive)
-        </div>*@
+                @Html.CheckBoxFor(
+                    m => m.IsActive)
+            </div>*@
 
         <div class="d-flex">
             <button type="submit"

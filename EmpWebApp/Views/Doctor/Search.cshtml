@@ -27,8 +27,7 @@
 
             new
             {
-                @class =
-                "form-control"
+                @class = "form-control"
             })
 
     </div>
@@ -38,15 +37,14 @@
         Search
     </button>
 
-    @Html.ActionLink(
+    @*@Html.ActionLink(
         "Back",
         "Index",
         null,
         new
         {
-            @class =
-            "btn btn-secondary ms-2"
-        })
+            @class = "btn btn-secondary ms-2"
+        })*@
 }
 
 @if (Model != null)
@@ -62,7 +60,7 @@
                 <th>Specialisation</th>
                 <th>Experience</th>
                 <th>Consultation Fee</th>
-                @*<th>Available</th>*@
+                <th>Actions</th>
             </tr>
         </thead>
 
@@ -76,11 +74,34 @@
                     <td>@doctor.Specialisation</td>
                     <td>@doctor.YearsOfExperience</td>
                     <td>@doctor.ConsultationFee</td>
-                    @*<td>
-                        @(doctor.IsActive
-                            ? "Yes"
-                            : "No")
-                    </td>*@
+
+                    <td>
+                        @Html.ActionLink(
+                            "Edit",
+                            "Edit",
+                            "Doctor",
+                            new
+                            {
+                                id = doctor.DoctorId
+                            },
+                            new
+                            {
+                                @class = "btn btn-warning btn-sm me-2"
+                            })
+
+                        @Html.ActionLink(
+                            "Delete",
+                            "Delete",
+                            "Doctor",
+                            new
+                            {
+                                id = doctor.DoctorId
+                            },
+                            new
+                            {
+                                @class = "btn btn-danger btn-sm"
+                            })
+                    </td>
                 </tr>
             }
 
